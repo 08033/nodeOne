@@ -84,7 +84,7 @@ async function upsertListingByName(nameOfListing, updatedListing, collection) {
         //mongoClient.connect()
         await mongoClient.db(dbName).collection(collection)
             .updateOne({ name: nameOfListing },
-                { $set: updatedListing },
+                { $set: { name: updatedListing.name, age: updatedListing.age, dob: updatedListing.dob } },
                 { upsert: true }).then(result => {
                     res = result
                     console.log(`${result.matchedCount} document(s) matched the query criteria.`);
